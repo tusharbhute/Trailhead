@@ -1,0 +1,9 @@
+<apex:page controller="PieExample">
+    <apex:pageblock title="Case Types" >
+        <apex:chart height="450" width="450" data="{!PieData}"> 
+            <apex:pieSeries tips="true" dataField="data" labelField="name"/> 
+            <apex:legend position="bottom"/>
+        </apex:chart>
+    </apex:pageblock>
+
+</apex:page>
