@@ -1,0 +1,33 @@
+<apex:page controller="ObjectDescribeController" >
+  <apex:form >
+      <apex:pageBlock title="Objects & Fields Info" id="theBlock">
+          <apex:pageBlockSection title="Select Object" id="section1">
+              <apex:SelectList value="{!objName}" size="1">
+                  <apex:selectOptions value="{!ObjNames}"></apex:selectOptions>
+              </apex:SelectList>
+              <apex:commandButton action="{!RetrieveFieldDetails}" value="Get Field Details" rerender="section2"/>
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Field Information" id="section2">
+              <apex:pageBlockTable value="{!tableList}" var="f" id="theTable">
+                  <apex:column >
+                      <apex:facet name="header">Field Name</apex:facet>
+                      <apex:outputText value="{!f.Label}"/>
+                  </apex:column>
+                  <apex:column >
+                      <apex:facet name="header">Field Length</apex:facet>
+                      <apex:outputText value="{!f.Length}"/>
+                  </apex:column>
+                  <apex:column >
+                      <apex:facet name="header">API Name</apex:facet>
+                      <apex:outputText value="{!f.APIName}"/>
+                  </apex:column>
+                  <apex:column >
+                      <apex:facet name="header">Data Type</apex:facet>
+                      <apex:outputText value="{!f.fieldType}"/>
+                  </apex:column>
+              </apex:pageBlockTable>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+    
+  </apex:form>
+</apex:page>

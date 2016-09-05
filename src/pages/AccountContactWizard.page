@@ -1,0 +1,23 @@
+<apex:page controller="customPageController">
+    <apex:form id="theForm">
+    <apex:pageMessages />
+        <apex:pageBlock id="theBlock" title="Account & Contact Wizard">
+            <apex:pageBlockSection id="section1" title="Create Account" columns="2">
+                <apex:inputText label="Account Name" value="{!accName}"/>
+                <apex:inputText label="Account Phone" value="{!accPhone}"/>
+                <apex:inputText label="Account Fax" value="{!accFax}"/>
+                <apex:commandButton action="{!insertAcc}" value="Save"/>
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="section2" title="Create Contact" rendered="{!if(accFlag,true,false)}">
+                <apex:inputText label="First Name" value="{!conFirstName}"/>
+                <apex:inputText label="Last Name" value="{!conLastName}"/>
+                <apex:inputText label="Email" value="{!conEmail}"/>
+                <apex:commandButton action="{!insertCon}" value="Save"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+    </apex:form>
+
+</apex:page>

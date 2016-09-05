@@ -1,0 +1,81 @@
+<apex:page controller="TypeAheadController">
+    
+    <style type="text/css">
+        .widthClass {
+            width: 150px;
+        } 
+
+        .ui-autocomplete-loading { 
+            background: white url(/img/loading32.gif) right center no-repeat;
+            background-size:15px 15px; 
+        }
+        
+        .placeHolder {
+            font-style: italic;
+        }
+    </style>
+    
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" />
+    <apex:styleSheet value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+   
+    <script>
+     var UsrResults ;
+     var queryTerm;
+     
+     $(function() {
+    
+       
+        $('[id$=UsrNameToSearch]').autocomplete({
+        
+        
+            minLength: 3,
+            source: function(request, response) {
+                        queryTerm = request.term;
+                        TypeAheadController.searchUserName(request.term, function(result, event){
+                            if(event.type == 'exception') {
+                                  alert(event.message);
+                            } else {
+                                 
+                                 UsrResults = result;
+                                 response(UsrResults);
+                                
+                            }
+                        });
+                   },
+            focus: function( event, ui ) {
+                    $('[id $=UsrNameToSearch]').val( ui.item.Username);
+                    return false;
+                    },
+            select: function( event, ui ) {
+                        $('[id $=UsrNameToSearch]').val( ui.item.Username);
+                             return false;
+                    }
+         })
+        .autocomplete( "instance" )._renderItem = function( ul, item ) {
+         var entry = "<a>" + item.Username;
+           
+            entry = entry + "</a>";
+            entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
+            return $( "<li></li>" )
+                .data( "item.autocomplete", item )
+                .append( entry )
+                .appendTo( ul );
+        };
+        })
+         
+      
+    </script>
+    
+    <apex:form >
+        <apex:pageBlock title="Type Ahead Feature Demo" id="theBlock">
+            <apex:pageBlockSection title="Select User" id="section1" columns="1">
+                <apex:outputText value="Type First Three Letters Of UserName"/>
+                <apex:inputText title="UserName" value="{!Owner}" id="UsrNameToSearch" styleClass="placeHolder"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+
+
+</apex:page>
