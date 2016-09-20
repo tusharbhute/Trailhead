@@ -1,1 +1,1 @@
-# Trailhead Master Branch
+# Trailhead Master Branch. This is the main branch
