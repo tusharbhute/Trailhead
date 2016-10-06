@@ -1,4 +1,3 @@
-<!-- Adding Comment -->
 <apex:page controller="PieExample">
     <apex:pageblock title="Case Types" >
         <apex:chart height="450" width="450" data="{!PieData}"> 

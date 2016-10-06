@@ -1,3 +1,4 @@
+/*Animal Locator Class*/
 public class AnimalLocator 
 {
     public static string getAnimalNameById(Integer Id)
